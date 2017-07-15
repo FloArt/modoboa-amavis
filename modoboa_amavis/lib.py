@@ -57,7 +57,7 @@ class AMrelease(object):
             else:
                 self.sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
                 self.sock.connect(conf["am_pdp_socket"])
-        except socket.error, err:
+        except socket.error as err:
             raise InternalError(
                 _("Connection to amavis failed: %s" % str(err))
             )
@@ -267,7 +267,7 @@ def create_user_and_use_policy(name, policy, priority=7):
     :param str name: user record name
     :param str policy: string or Policy instance
     """
-    if isinstance(policy, basestring):
+    if isinstance(policy, str):
         policy = Policy.objects.get(policy_name=policy[:32])
     Users.objects.get_or_create(
         email=name, fullname=name, priority=priority, policy=policy

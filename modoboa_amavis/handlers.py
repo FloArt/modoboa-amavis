@@ -37,18 +37,18 @@ def menu(sender, location, user, **kwargs):
 def manage_domain_policy(sender, instance, **kwargs):
     """Create user and policy when a domain is added."""
     if kwargs.get("created"):
-        create_user_and_policy(u"@{0}".format(instance.name))
+        create_user_and_policy("@{0}".format(instance.name))
     else:
         update_user_and_policy(
-            u"@{0}".format(instance.oldname),
-            u"@{0}".format(instance.name)
+            "@{0}".format(instance.oldname),
+            "@{0}".format(instance.name)
         )
 
 
 @receiver(signals.pre_delete, sender=admin_models.Domain)
 def on_domain_deleted(sender, instance, **kwargs):
     """Delete user and policy for domain."""
-    delete_user_and_policy(u"@{0}".format(instance.name))
+    delete_user_and_policy("@{0}".format(instance.name))
 
 
 @receiver(signals.post_save, sender=admin_models.DomainAlias)
@@ -57,15 +57,15 @@ def on_domain_alias_created(sender, instance, **kwargs):
     if not kwargs.get("created"):
         return
     create_user_and_use_policy(
-        u"@{0}".format(instance.name),
-        u"@{0}".format(instance.target.name)
+        "@{0}".format(instance.name),
+        "@{0}".format(instance.target.name)
     )
 
 
 @receiver(signals.pre_delete, sender=admin_models.DomainAlias)
 def on_domain_alias_deleted(sender, instance, **kwargs):
     """Delete user for domain alias."""
-    delete_user(u"@{0}".format(instance.name))
+    delete_user("@{0}".format(instance.name))
 
 
 @receiver(signals.post_save, sender=admin_models.Mailbox)
@@ -95,7 +95,7 @@ def on_mailbox_deleted(sender, instance, **kwargs):
     """Clean amavis database when a mailbox is removed."""
     if not param_tools.get_global_parameter("manual_learning"):
         return
-    delete_user_and_policy(u"@{0}".format(instance.full_address))
+    delete_user_and_policy("@{0}".format(instance.full_address))
 
 
 @receiver(signals.post_save, sender=admin_models.AliasRecipient)

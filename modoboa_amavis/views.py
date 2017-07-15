@@ -194,7 +194,7 @@ def viewheaders(request, mail_id):
 
 
 def check_mail_id(request, mail_id):
-    if type(mail_id) in [str, unicode]:
+    if type(mail_id) is str:
         if "rcpt" in request.POST:
             mail_id = ["%s %s" % (request.POST["rcpt"], mail_id)]
         else:

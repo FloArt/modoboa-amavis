@@ -27,7 +27,7 @@ class Command(BaseCommand):
     def __vprint(self, msg):
         if not self.verbose:
             return
-        print msg
+        print(msg)
 
     def handle(self, *args, **options):
         Amavis().load()

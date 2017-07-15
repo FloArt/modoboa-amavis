@@ -46,7 +46,7 @@ class Command(BaseCommand):
 
     def send_pr_notification(self, rcpt, reqs):
         if self.options["verbose"]:
-            print "Sending notification to %s" % rcpt
+            print("Sending notification to %s" % rcpt)
         total = reqs.count()
         reqs = reqs.all()[:10]
         content = render_to_string(
@@ -63,7 +63,7 @@ class Command(BaseCommand):
             port=self.options["smtp_port"]
         )
         if not status:
-            print msg
+            print(msg)
 
     def notify_admins_pending_requests(self):
         self.sender = param_tools.get_global_parameter(
@@ -86,7 +86,7 @@ class Command(BaseCommand):
         reqs = Msgrcpt.objects.filter(rs='p')
         if not reqs.count():
             if self.options["verbose"]:
-                print "No release request currently pending"
+                print("No release request currently pending")
             return
         for su in User.objects.filter(is_superuser=True):
             if not hasattr(su, "mailbox"):

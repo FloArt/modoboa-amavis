@@ -215,7 +215,7 @@ class SQLconnector(object):
             str(qmail.mail_text)
             for qmail in Quarantine.objects.filter(mail=mailid)
         ])
-        if isinstance(content, unicode):
+        if isinstance(content, str):
             content = content.encode("utf-8")
         return content
 

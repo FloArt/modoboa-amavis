@@ -21,7 +21,7 @@ class Maddr(models.Model):
     domain = models.CharField(max_length=765)
 
     class Meta:
-        db_table = u'maddr'
+        db_table = 'maddr'
         managed = False
 
 
@@ -31,7 +31,7 @@ class Mailaddr(models.Model):
     email = models.CharField(unique=True, max_length=255)
 
     class Meta:
-        db_table = u'mailaddr'
+        db_table = 'mailaddr'
         managed = False
 
 
@@ -58,7 +58,7 @@ class Msgs(models.Model):
     host = models.CharField(max_length=765)
 
     class Meta:
-        db_table = u'msgs'
+        db_table = 'msgs'
         managed = False
         unique_together = ('partition_tag', 'mail_id')
 
@@ -78,7 +78,7 @@ class Msgrcpt(models.Model):
     smtp_resp = models.CharField(max_length=765, blank=True)
 
     class Meta:
-        db_table = u'msgrcpt'
+        db_table = 'msgrcpt'
         managed = False
         unique_together = ("partition_tag", "mail", "rseqnum")
 
@@ -200,7 +200,7 @@ class Policy(models.Model):
     sa_username = models.CharField(max_length=192, blank=True, null=True)
 
     class Meta:
-        db_table = u'policy'
+        db_table = 'policy'
         managed = False
 
 
@@ -211,7 +211,7 @@ class Quarantine(models.Model):
     mail_text = models.BinaryField()
 
     class Meta:
-        db_table = u'quarantine'
+        db_table = 'quarantine'
         managed = False
         ordering = ["-mail__time_num"]
         unique_together = ("partition_tag", "mail", "chunk_ind")
@@ -225,7 +225,7 @@ class Users(models.Model):
     fullname = models.CharField(max_length=765, blank=True)
 
     class Meta:
-        db_table = u'users'
+        db_table = 'users'
         managed = False
 
 
@@ -235,5 +235,5 @@ class Wblist(models.Model):
     wb = models.CharField(max_length=30)
 
     class Meta:
-        db_table = u'wblist'
+        db_table = 'wblist'
         managed = False
