@@ -212,11 +212,9 @@ class SQLconnector(object):
     def get_mail_content(self, mailid):
         """Retrieve the content of a message."""
         content = "".join([
-            str(qmail.mail_text)
+            qmail.mail_text.encode("utf-8")
             for qmail in Quarantine.objects.filter(mail=mailid)
         ])
-        if isinstance(content, str):
-            content = content.encode("utf-8")
         return content
 
 
